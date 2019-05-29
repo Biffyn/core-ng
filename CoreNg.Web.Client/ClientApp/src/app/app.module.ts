@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { CoreModule } from './core/core.module';
-import { SnotifyService, ToastDefaults, SnotifyModule } from 'ng-snotify';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,17 +14,9 @@ import { SnotifyService, ToastDefaults, SnotifyModule } from 'ng-snotify';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    CoreModule,
-    SnotifyModule
+    CoreModule
   ],
-  providers: [
-    { provide: 'BASE_API_URL', useValue: environment.api_url },
-    {
-      provide: 'SnotifyToastConfig',
-      useValue: ToastDefaults
-    },
-    SnotifyService
-  ],
+  providers: [{ provide: 'BASE_API_URL', useValue: environment.api_url }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

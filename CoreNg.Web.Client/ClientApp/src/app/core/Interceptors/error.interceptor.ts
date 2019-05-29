@@ -9,27 +9,21 @@ import {
 import { Injectable, isDevMode } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SnotifyService } from 'ng-snotify';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  private snotifyConfig = {
-    timeout: 3000,
-    showProgressBar: true,
-    closeOnClick: false,
-    pauseOnHover: true
-  };
-
-  constructor(public snotify: SnotifyService) {}
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: any) => {
         if (error instanceof HttpErrorResponse) {
           try {
-            this.snotify.error(error.error, 'Error Occurred', this.snotifyConfig);
+            // TODO: Add Notification service to display error messages
+            console.error('An error occurred:', error.message);
           } catch (e) {
-            this.snotify.error('An unknown error occurred', 'Error Occurred', this.snotifyConfig);
+            // TODO: Add Notification service to display error messages
+            console.error('An error occurred:', error.message);
           }
         }
 
